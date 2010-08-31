@@ -3,7 +3,7 @@
 Summary:	Polkit-kde-1 wrapper library around polkit-gobject and polkit-agent
 Name:		polkit-kde-1
 Version:	0.95.1
-Release:	1
+Release:	2
 License:	GPL v2
 Group:		Libraries
 Source0:	ftp://ftp.kde.org/pub/kde/stable/apps/KDE4.x/admin/%{name}-%{version}.tar.bz2
