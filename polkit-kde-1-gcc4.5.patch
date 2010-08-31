@@ -1,0 +1,21 @@
+--- agent/AuthDialog.cpp.orig	2010-08-31 19:12:10.449912847 +0200
++++ agent/AuthDialog.cpp	2010-08-31 19:12:33.034286166 +0200
+@@ -169,7 +169,7 @@
+         foreach(PolkitQt1::Identity *identity, identities) {
+             // First check to see if the user is valid
+             qDebug() << "User: " << identity;
+-            KUser user = KUser::KUser(identity->toString().remove("unix-user:"));
++            KUser user = KUser(identity->toString().remove("unix-user:"));
+             if (!user.isValid()) {
+                 kWarning() << "User invalid: " << user.loginName();
+                 continue;
+--- agent/CMakeLists.txt.orig	2010-08-31 19:13:23.516583753 +0200
++++ agent/CMakeLists.txt	2010-08-31 19:13:51.034486058 +0200
+@@ -12,6 +12,7 @@
+ target_link_libraries(polkit-kde-authentication-agent-1
+                                          ${KDE4_KDEUI_LIBS}
+                                          ${POLKITQT-1_AGENT_LIBRARY}
++					 ${POLKITQT-1_CORE_LIBRARY}
+ )
+ 
+ configure_file(polkit-kde-authentication-agent-1.desktop.in ${CMAKE_BINARY_DIR}/polkit-kde-authentication-agent-1.desktop)
