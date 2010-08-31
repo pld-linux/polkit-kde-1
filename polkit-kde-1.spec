@@ -9,6 +9,7 @@ Group:		Libraries
 Source0:	ftp://ftp.kde.org/pub/kde/stable/apps/KDE4.x/admin/%{name}-%{version}.tar.bz2
 # Source0-md5:	68e40d2a43335cb5876a1c8bc51c461b
 URL:		http://www.kde.org/
+Patch0:		%{name}-gcc4.5.patch
 BuildRequires:	QtCore-devel >= %{qtver}
 BuildRequires:	QtDBus-devel >= %{qtver}
 BuildRequires:	QtGui-devel >= %{qtver}
@@ -26,6 +27,7 @@ Polkit-kde-1 is a polkit-1 authentication agent.
 
 %prep
 %setup -q
+%patch0 -p0
 
 %build
 install -d build
