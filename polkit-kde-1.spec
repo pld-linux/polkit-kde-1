@@ -2,12 +2,12 @@
 
 Summary:	Polkit-kde-1 wrapper library around polkit-gobject and polkit-agent
 Name:		polkit-kde-1
-Version:	0.95.1
-Release:	3
+Version:	0.99.0
+Release:	1
 License:	GPL v2
 Group:		Libraries
-Source0:	ftp://ftp.kde.org/pub/kde/stable/apps/KDE4.x/admin/%{name}-%{version}.tar.bz2
-# Source0-md5:	68e40d2a43335cb5876a1c8bc51c461b
+Source0:	ftp://ftp.kde.org/pub/kde/stable/apps/KDE4.x/admin/polkit-kde-agent-1-%{version}.tar.bz2
+# Source0-md5:	a02d3fddc6270a88bceaf3ba604c92f8
 URL:		http://www.kde.org/
 Patch0:		%{name}-gcc4.5.patch
 BuildRequires:	QtCore-devel >= %{qtver}
@@ -17,7 +17,7 @@ BuildRequires:	QtTest-devel >= %{qtver}
 BuildRequires:	QtXml-devel >= %{qtver}
 BuildRequires:	automoc4
 BuildRequires:	cmake
-BuildRequires:	polkit-qt-1-devel >= 0.96.1
+BuildRequires:	polkit-qt-1-gui-devel >= 0.99.0
 BuildRequires:	qt4-build >= %{qtver}
 BuildRequires:	qt4-qmake >= %{qtver}
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
@@ -26,8 +26,7 @@ BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 Polkit-kde-1 is a polkit-1 authentication agent.
 
 %prep
-%setup -q
-%patch0 -p0
+%setup -q -n polkit-kde-agent-1-%{version}
 
 %build
 install -d build
@@ -59,4 +58,6 @@ rm -rf $RPM_BUILD_ROOT
 %files -f %{name}.lang
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_libdir}/kde4/libexec/polkit-kde-authentication-agent-1
-%{_sysconfdir}/xdg/autostart/polkit-kde-authentication-agent-1.desktop
+%dir %{_datadir}/apps/policykit1-kde
+%{_datadir}/apps/policykit1-kde/policykit1-kde.notifyrc
+%{_datadir}/autostart/polkit-kde-authentication-agent-1.desktop
