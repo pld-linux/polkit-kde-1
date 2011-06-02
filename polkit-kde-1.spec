@@ -4,7 +4,7 @@ Summary:	Polkit-kde-1 wrapper library around polkit-gobject and polkit-agent
 Name:		polkit-kde-1
 Version:	0.99.0
 Release:	1
-License:	GPL v2
+License:	GPL v2+
 Group:		Libraries
 Source0:	ftp://ftp.kde.org/pub/kde/stable/apps/KDE4.x/admin/polkit-kde-agent-1-%{version}.tar.bz2
 # Source0-md5:	a02d3fddc6270a88bceaf3ba604c92f8
@@ -20,6 +20,7 @@ BuildRequires:	cmake
 BuildRequires:	polkit-qt-1-gui-devel >= 0.99.0
 BuildRequires:	qt4-build >= %{qtver}
 BuildRequires:	qt4-qmake >= %{qtver}
+BuildRequires:	rpmbuild(macros) >= 1.600
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
@@ -32,13 +33,7 @@ Polkit-kde-1 is a polkit-1 authentication agent.
 install -d build
 cd build
 %cmake \
-	-DCMAKE_INSTALL_PREFIX=%{_prefix} \
 	-LCMS_DIR=%{_libdir} \
-	-DLIB_INSTALL_DIR=%{_libdir} \
-	-DCMAKE_BUILD_TYPE=%{!?debug:release}%{?debug:debug} \
-%if "%{_lib}" == "lib64"
-	-DLIB_SUFFIX=64 \
-%endif
 	../
 %{__make}
 
@@ -49,6 +44,10 @@ rm -rf $RPM_BUILD_ROOT
 	DESTDIR=$RPM_BUILD_ROOT \
 	kde_htmldir=%{_kdedocdir} \
 	kde_libs_htmldir=%{_kdedocdir}
+
+# unsupported
+%{__rm} -r $RPM_BUILD_ROOT%{_datadir}/locale/sr@ijekavian
+%{__rm} -r $RPM_BUILD_ROOT%{_datadir}/locale/sr@ijekavianlatin
 
 %find_lang polkit-kde-1 --with-kde --all-name
 
